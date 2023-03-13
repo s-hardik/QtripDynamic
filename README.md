@@ -1,1 +1,0 @@
-# atharvatelange190-ME_QTRIPDYNAMIC
