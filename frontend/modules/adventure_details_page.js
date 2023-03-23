@@ -4,9 +4,9 @@ import config from "../conf/index.js";
 function getAdventureIdFromURL(search) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Get the Adventure Id from the URL
-  console.log(search);
+  //console.log(search);
   let params = new URLSearchParams(search);
-  console.log(params.get('adventure'))
+  //console.log(params.get('adventure'))
   return params.get('adventure')
   // Place holder for functionality to work in the Stubs
 }
@@ -16,7 +16,7 @@ async function fetchAdventureDetails(adventureId) {
   // 1. Fetch the details of the adventure by making an API call
   try{
     const data= await fetch(config.backendEndpoint+`/adventures/detail?adventure=${adventureId}`);
-   return data.json();
+    return await data.json();
     
    }
   catch{
@@ -24,7 +24,6 @@ async function fetchAdventureDetails(adventureId) {
 
   }
   // Place holder for functionality to work in the Stubs
-  return null;
 }
 
 //Implementation of DOM manipulation to add adventure details to DOM
@@ -111,15 +110,15 @@ function captureFormSubmit(adventure) {
   // 1. Capture the query details and make a POST API call using fetch() to make the reservation
   // 2. If the reservation is successful, show an alert with "Success!" and refresh the page. If the reservation fails, just show an alert with "Failed!".
   const myForm=document.getElementById("myForm");
-  myForm.addEventListener("submit", async(e)=>{
+  myForm.addEventListener("submit",async(e)=>{
     e.preventDefault();
-    let data={
-      name: myForm.elements["name"].value,
-      date: new Date(myForm.elements["date"].value),
-      person: myForm.elements["person"].value,
-      adventure: adventure["id"]
+    let  data={
+      name:myForm.elements["name"].value,
+      date:new Date(myForm.elements["date"].value),
+      person:myForm.elements["person"].value,
+      adventure:adventure["id"]
     }
-    console.log(data);
+    //console.log(data);
     try{
       const url=`${config.backendEndpoint}/reservations/new`;
       const res=await fetch(url,{
@@ -142,7 +141,7 @@ function captureFormSubmit(adventure) {
 function showBannerIfAlreadyReserved(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If user has already reserved this adventure, show the reserved-banner, else don't
-  console.log(adventure);
+  //console.log(adventure);
   if(adventure["reserved"]==true){
   document.getElementById("reserved-banner").style.display="block";}
   else{

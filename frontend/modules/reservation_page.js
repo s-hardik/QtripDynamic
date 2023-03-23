@@ -8,7 +8,7 @@ async function fetchReservations() {
     const url=`${config.backendEndpoint}/reservations`;
     const data=await fetch(url);
     const result=await data.json();
-    console.log(result);
+    //console.log(result);
     return result;
   }
   // Place holder for functionality to work in the Stubs

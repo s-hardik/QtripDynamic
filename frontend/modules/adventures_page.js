@@ -7,7 +7,7 @@ function getCityFromURL(search) {
   // 1. Extract the city id from the URL's Query Param and return it
   let params = new URLSearchParams(search);
   let city = params.get("city");
-  console.log(city);
+  //console.log(city);
   return city;
 
 }
@@ -19,7 +19,6 @@ async function fetchAdventures(city) {
   try{
     const data1 = await fetch(config.backendEndpoint+`/adventures/?city=${city}`);
     return data1.json();
-    
    }
   catch{
     return null;
@@ -35,45 +34,25 @@ function addAdventureToDOM(adventures) {
   for(let i=0;i<adventures.length;i++)
   {
     var div=document.createElement("div");
-    div.setAttribute("class","col-12 col-sm-6 col-lg-3 mb-3");
-    var a=document.createElement("a");
-    a.setAttribute("id",`${adventures[i].id}`);
-    a.href=`detail/?adventure=${adventures[i].id}`;
-    var div1=document.createElement("div");
-    div1.setAttribute("class","card activity-card");
-    var img=document.createElement("img");
-    img.src=adventures[i].image;
-    var div2=document.createElement("div");
-    var cat=document.createElement("div");
-    cat.setAttribute("class","category-banner");
-    cat.innerText=adventures[i].category;
-    div2.setAttribute("class","card-body col-md-12 mt-2");
-    var div3=document.createElement("div");
-    div3.setAttribute("class","d-flex justify-content-between");
-    var p1=document.createElement("p");
-    p1.innerText=adventures[i].name;
-    var p2=document.createElement("p");
-    p2.innerText="₹"+adventures[i].costPerHead;
-    var div4=document.createElement("div");
-    div4.setAttribute("class","d-flex justify-content-between");
-    var p3=document.createElement("p");
-    p3.innerText="Duration";
-    var p4=document.createElement("p");
-    p4.innerText=adventures[i].duration+" Hours";
-    div4.append(p3);
-    div4.append(p4);
-
-    div3.append(p1);
-    div3.append(p2);
-    div2.append(div3);
-    div2.append(div4);
-    div1.append(img);
-    div1.append(cat);
-    div1.append(div2);
-    a.append(div1);
-    div.append(a);
+    div.setAttribute("class", "col-12 col-sm-6 col-lg-3 mb-3");
+    div.innerHTML = `
+      <a id=${adventures[i].id} href="detail/?adventure=${adventures[i].id}">
+        <div class="card activity-card">
+          <img src=${adventures[i].image}>
+            <div class="category-banner">${adventures[i].category}</div>
+            <div class="card-body col-md-12 mt-2">
+              <div class="d-flex justify-content-between">
+                <p>${adventures[i].name}</p>
+                <p>₹${adventures[i].costPerHead}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>Duration</p>
+                <p>${adventures[i].duration} Hours</p>
+              </div>
+            </div>
+        </div>
+      </a>`
     document.getElementById("data").append(div);
-
   }
 
 }
@@ -82,11 +61,9 @@ function addAdventureToDOM(adventures) {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-  console.log(list);
-  console.log(low);
-  console.log(high);
+  //console.log(list);
   let filteredList = list.filter((e) => (e.duration>=low && e.duration<=high));
-  console.log(filteredList);
+  //console.log(filteredList);
   return filteredList;
 }
 
@@ -95,7 +72,7 @@ function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
   let filteredList=[];
-  console.log(list);
+  //console.log(list);
   list.filter(function (e) {
     if(categoryList.includes(e.category))
       filteredList.push(e);   
@@ -118,7 +95,7 @@ function filterFunction(list, filters) {
 
   let filteredlist =[]
   let arr=filters["duration"].split("-")
-  console.log(arr);
+  //console.log(arr);
   if(filters["category"].length>0 && filters["duration"].length>0){
     filteredlist=filterByCategory(list, filters.category)
     filteredlist=filterByDuration(filteredlist,parseInt(arr[0]),parseInt(arr[1]))
@@ -166,10 +143,10 @@ function generateFilterPillsAndUpdateDOM(filters) {
    // console.log(categoryList[i]);
     li.push(categoryList[i]);
   }
-  console.log(li);
+  //console.log(li);
   for(let i=0;i<li.length;i++)
   {
-    console.log(li[i]);
+    //console.log(li[i]);
     var div=document.createElement("div");
     div.setAttribute("class","category-filter");
     div.innerText=li[i];
