@@ -70,6 +70,10 @@
 
         async function filterOnSearchField(event) {
             let value = event.target.value;
+            if(!value)
+            {
+                init();
+            }
             let filteredCity = await filterCityOnSearchField(value);
             //console.log(filteredCity);
             document.getElementById("data").innerText = "";
