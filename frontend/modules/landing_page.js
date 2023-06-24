@@ -13,6 +13,13 @@ async function init() {
   });
 }
 
+async function filterCityOnSearchField(value){
+  let cities = await fetchCities();
+ return cities.filter(cityElement=>cityElement.city.toLowerCase().startsWith(value.toLowerCase()));
+ 
+}
+
+
 //Implementation of fetch call
 async function fetchCities() {
   // TODO: MODULE_CITIES
@@ -49,4 +56,4 @@ function addCityToDOM(id, city, description, image) {
 
 }
 
-export { init, fetchCities, addCityToDOM };
+export { init, fetchCities, addCityToDOM , filterCityOnSearchField};
