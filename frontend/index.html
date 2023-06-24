@@ -67,7 +67,8 @@
         (async function () {
             init();
         })();
-
+        const input = document.querySelector("input");
+        input.addEventListener("input", filterOnSearchField);
         async function filterOnSearchField(event) {
             let value = event.target.value;
             if(!value)
